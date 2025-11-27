@@ -8,7 +8,7 @@ const int SAMPLES = 2000;           // sample number for RMS
 const int SAMPLE_DELAY_US = 1200;   // sampling frequency (in ms)
 const float ADS_LSB = 2.048f / 32768.0f; // 62.5 µV (GAIN_ONE)
 const float CT_A_PER_V = 5.0f;     // calibration SCT-013-005 : 5A/1V
-// const float IGNORE_THRESHOLD_A = 0.01f; // ignore < 10 mA
+const float IGNORE_THRESHOLD_A = 0.001f; // ignore < 1 mA
 
 // Baseline measure (noise) at start
 float baseline_vrms = 0.0f;
