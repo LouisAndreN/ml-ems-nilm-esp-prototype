@@ -18,7 +18,7 @@ This system is deployed in a japanese residence but can also be adapted for indu
 - AWG14 cables
 - Proster multimeter
 
-See `docs/hardware_schematic.pdf` for complete circuit.
+See `docs/schematic-circuit.png` for complete circuit.
 
 The SCT-013 current sensor connects via a 3.5mm TRRS jack.
 
