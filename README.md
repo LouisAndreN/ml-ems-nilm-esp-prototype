@@ -1,6 +1,6 @@
 # Non-Intrusive Load Monitoring System & Energy Monitoring
 
-The goal of this project is to create a monitoring system for home to track energy consumption of home devices such as frdge, induction heater, air conditionner, computers, charging smartphones, lights, ..., to detect anomalies if possible to anticipate maintenance, predict consumption of the household, anticipate devices usage time to predict device usage patterns to avoid tripping the circuit breaker.
+The goal of this project is to create a monitoring system to track energy consumption of home devices such as frdge, induction heater, air conditionner, computers, charging smartphones, lights, ..., to detect anomalies and anticipate maintenance, predict consumption of household and anticipate devices usage time to predict device usage patterns to avoid tripping the circuit breaker.
 
 This system is deployed in a japanese residence but can also be adapted for industrial fields, in manufacture or other urban buildings.
 
