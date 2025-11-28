@@ -34,7 +34,7 @@ The SCT-013 current sensor connects via a 3.5mm TRRS jack.
 
 ## Future features
 
-Some devices can be tracked but because of the relative low precision of the ADS1115, the system needs to be improved with an audio card 48kHz (PCM2704 ?) to get more harmonics to detect specific devices such as induction heater.
+Some devices can be tracked but because of the relative low precision of the ADS1115, the system needs to be improved with an audio card 48kHz (PCM1808 ?) to get more harmonics until 24kHz (Nyquist theorem) to detect specific devices such as induction heater.
 
 # 日本語
 
