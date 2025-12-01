@@ -13,10 +13,10 @@ Z_ADC_A1 ≈ 1-10 MΩ
 Z_VREF_to_GND = Z_R2 + Z_C_VREF = 41.8 kΩ
 
 // Thevenin impedance at VREF
-Z_thevenin = Z_R1 || Z_VREF_to_GND
-Z_thevenin = 10k || 41.8k
-Z_thevenin = (10k × 41.8k) / (10k + 41.8k)
-Z_thevenin = 418k / 51.8k ≈ 8.07 kΩ
+Z_th = Z_R1 || Z_VREF_to_GND
+Z_th = 10k || 41.8k
+Z_th = (10k × 41.8k) / (10k + 41.8k)
+Z_th = 418k / 51.8k ≈ 8.07 kΩ
 
 // Path A0 from VREF impedance
 Z_to_A0 = Z_Rpull + (Z_Rseries || Z_C2 || Z_ADC_A0)
@@ -63,7 +63,7 @@ V_B = 314 mV × 0.091 = 28.6 mV
 Z_ADC_A0 >> Z_Rseries => V_A0 ≈ V_B = 28.6 mV RMS
 
 // Voltage at A1 (VREF)
-Z_ADC_A1 >> Z_thevenin => V_A1 ≈ V_VREF_AC = 314 mV RMS
+Z_ADC_A1 >> Z_th => V_A1 ≈ V_VREF_AC = 314 mV RMS
 
 // Differential measure A1 - A0
 V_diff = V_A1 - V_A0
