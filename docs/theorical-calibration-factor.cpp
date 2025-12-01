@@ -30,11 +30,11 @@ Z_to_A0 = Z_Rpull + (Z_Rseries || Z_C2 || Z_ADC_A0)
 // 2. To GND through R2+C_VREF : 33.3 kΩ
 // 3. To A0 through Rpull+Rseries : 1.1 kΩ
 
-Z_parallel_VREF = 10k || 33.3k || 1.1k
-
-- 10k || 33.3k = 7.69 kΩ 
-=> 7.69k || 1.1k = (7690 × 1100) / (7690 + 1100)
-              = 8459000 / 8790 ≈ 962 Ω
+Z_parallel_VREF = 10k || 33.3k || 1.1k // = Z_th || Z_to_A0
+                = 7.69k || 1.1k 
+                = (7690 × 1100) / (7690 + 1100)
+                = 8459000 / 8790 
+                ≈ 962 Ω
 
 Z_total = Z_C1 + Z_parallel_VREF
         = 318 + 962 = 1280 Ω
@@ -93,4 +93,4 @@ V_A1 ≈ 94 mV
 V_A0 = 94 mV × 0.091 = 8.6 mV
 // Differential measure A1 - A0
 V_diff = 94 - 8.6 = 85 mV // vs 62 mV = real measure of 1250W electric kettle
-=> Ratio = 1.11
+=> Ratio = 1.37
