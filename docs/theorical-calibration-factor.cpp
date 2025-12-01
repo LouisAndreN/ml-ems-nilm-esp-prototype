@@ -75,22 +75,22 @@ Z_C_VREF = 31.8 kΩ // 50 Hz
 Z_R1 = 10 kΩ
 
 // Signal attenuated by capacitive divider
-V_after_filter / V_before = Z_R2 / (Z_R2 + Z_C_VREF)
-V_after_filter / V_before = 10k / (10k + 31.8k)
-V_after_filter / V_before = 10k / 41.8k = 0.239
+V_after_filter / V_before = Z_R2 / sqrt(Z_R2^2 + Z_C_VREF^2)
+V_after_filter / V_before = 10k / sqrt(10k^2 + 31.8k^2)
+V_after_filter / V_before ≈ 10k / 33.3k = 0.3
 
-=> Only 24% of the signal is received at 50 Hz
+=> Only 30% of the signal is received at 50 Hz
 
 // Signal at VREF with R2+C_VREF filter
 V_VREF_AC_crude = 314 mV // before
 
 // High-pass filter
-V_VREF_AC_real = 314 mV × 0.239 = 75 mV
+V_VREF_AC_real = 314 mV × 0.3 = 94 mV
 
 // Signal at A1
-V_A1 ≈ 75 mV
+V_A1 ≈ 94 mV
 // Signal at A0 through Rpull/Rseries
-V_A0 = 75 mV × 0.091 = 6.8 mV
+V_A0 = 94 mV × 0.091 = 8.6 mV
 // Differential measure A1 - A0
-V_diff = 75 - 6.8 = 68 mV // vs 62 mV = real measure of 1250W electric kettle
-=> Ratio = 1.1
+V_diff = 94 - 8.6 = 85 mV // vs 62 mV = real measure of 1250W electric kettle
+=> Ratio = 1.11
