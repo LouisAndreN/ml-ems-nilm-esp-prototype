@@ -15,18 +15,18 @@ The goal is to provide an accessible and practical system for monitoring househo
 
 ## Used material
 
-- Current transformers : SCT-013-005 (5A/1V) and SCT-013-030 (30A/1V)
-- 16-bit ADC (ADS1115, 860 SPS)
+- Current transformer SCT-013-030 (30A/1V)
+- 16-bit ADC ADS1115 (860 SPS)
 - Adafruit 3.5mm TRRS jack breakout
-- ESP32 S3 R16N8 (or ESP32-WROOM-32E)
+- ESP32 S3 R16N8 (ESP32-WROOM-32E at the beginning)
 - 2× 10kΩ resistors (divider)
 - 1× 1kΩ resistor (anti-aliasing filter)
 - 1× 100Ω resistor (protection)
 - 1× 10µF capacitor (coupling)
 - 1× 470nF capacitor (anti-aliasing filter)
 - Male plug and female plug JP type
-- AWG14 cables
-- Proster multimeter
+- AWG14 cables (can use AWG16 cables)
+- Proster multimeter with clamper
 
 See `docs/schematic-circuit.png` for complete circuit.
 
