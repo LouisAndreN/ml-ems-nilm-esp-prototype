@@ -9,7 +9,7 @@ Z_Rseries = 100 Ω
 Z_ADC_A0 ≈ 1-10 MΩ (really high)
 Z_ADC_A1 ≈ 1-10 MΩ (really high)
 
-//  Impedance VREF to GND (R2 + C_VREF in serial)
+// Impedance VREF to GND (R2 + C_VREF in serial)
 Z_VREF_to_GND ≈ R2 + Z_C_VREF ≈ 41.8 kΩ
 
 // Impedance Thevenin at VREF
