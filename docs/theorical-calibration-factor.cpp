@@ -6,11 +6,11 @@ Z_C_VREF = 1/(2π × 50 × 100nF) = 31.8 kΩ
 Z_Rpull = 1 kΩ
 Z_C2 = 1/(2π × 50 × 470nF) = 6.77 kΩ
 Z_Rseries = 100 Ω
-Z_ADC_A0 ≈ 1-10 MΩ (really high)
-Z_ADC_A1 ≈ 1-10 MΩ (really high)
+Z_ADC_A0 ≈ 1-10 MΩ
+Z_ADC_A1 ≈ 1-10 MΩ
 
-// VREF to GND impedance (R2 + C_VREF in serial)
-Z_VREF_to_GND ≈ R2 + Z_C_VREF ≈ 41.8 kΩ
+// VREF to GND impedance
+Z_VREF_to_GND = R2 + Z_C_VREF = 41.8 kΩ
 
 // Thevenin impedance at VREF
 Z_thevenin = R1 || Z_VREF_to_GND
