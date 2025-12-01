@@ -16,7 +16,7 @@ Z_VREF_to_GND = sqrt(Z_R2^2 + Z_C_VREF^2) = 33.3 kΩ
 Z_th = Z_R1 || Z_VREF_to_GND
 Z_th = 10k || 33.3k
 Z_th = (10k × 33.3k) / (10k + 33.3k)
-Z_th = 333k / 43.3k ≈ 7.69 kΩ
+Z_th = 333k / 43.3k ≈ 7.7 kΩ
 
 // Path A0 from VREF impedance
 Z_to_A0 = Z_Rpull + (Z_Rseries || Z_C2 || Z_ADC_A0)
@@ -31,7 +31,7 @@ Z_to_A0 = Z_Rpull + (Z_Rseries || Z_C2 || Z_ADC_A0)
 // 3. To A0 through Rpull+Rseries : 1.1 kΩ
 
 Z_parallel_VREF = 10k || 33.3k || 1.1k // = Z_th || Z_to_A0
-                = 7.69k || 1.1k 
+                = 7.7k || 1.1k 
                 = (7690 × 1100) / (7690 + 1100)
                 = 8459000 / 8790 
                 ≈ 962 Ω
@@ -69,10 +69,10 @@ Z_ADC_A1 >> Z_th => V_A1 ≈ V_VREF_AC = 314 mV RMS
 V_diff = V_A1 - V_A0
 V_diff = 314 mV - 28.6 mV = 285.4 mV RMS
 
-// Capaciter C_VREF in serial with R3 => high-pass filter
+// Capaciter C_VREF in serial with R2 => high-pass filter
 // 50 Hz < fc = 159Hz => low frequency blocked
 Z_C_VREF = 31.8 kΩ // 50 Hz
-Z_R1 = 10 kΩ
+Z_R2 = 10 kΩ
 
 // Signal attenuated by capacitive divider
 V_after_filter / V_before = Z_R2 / sqrt(Z_R2^2 + Z_C_VREF^2)
@@ -89,8 +89,8 @@ V_VREF_AC_real = 314 mV × 0.3 = 94 mV
 
 // Signal at A1
 V_A1 ≈ 94 mV
-// Signal at A0 through Rpull/Rseries
+// Signal at A0 through divider (Rseries / (Rpull + Rseries))
 V_A0 = 94 mV × 0.091 = 8.6 mV
   
 // Differential measure A1 - A0
-V_diff = 94 - 8.6 = 85 mV // for 1250W electric kettle
+V_diff = 94 - 8.6 = 85 mV // for 1250W electric kettle load
