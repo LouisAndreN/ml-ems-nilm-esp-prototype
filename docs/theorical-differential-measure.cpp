@@ -9,6 +9,9 @@ Z_Rseries = 100 Ω
 Z_ADC_A0 ≈ 1-10 MΩ
 Z_ADC_A1 ≈ 1-10 MΩ
 
+////////////////////////////////////////////////////////////////////////
+//////////////////// Voltage divider bridge from VREF //////////////////
+////////////////////////////////////////////////////////////////////////
 // VREF to GND impedance
 Z_VREF_to_GND = sqrt(Z_R2^2 + Z_C_VREF^2) = 33.3 kΩ
 
@@ -17,14 +20,26 @@ Z_th_VREF = Z_R1 || Z_VREF_to_GND
 Z_th_VREF = 10k || 33.3k
 Z_th_VREF = (10k × 33.3k) / (10k + 33.3k)
 Z_th_VREF = 333k / 43.3k ≈ 7.7 kΩ
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+  
+////////////////////////////////////////////////////////////////////////
+////////////////// Impedance at junction B, path to A0 /////////////////
+//////////////////////////////////////////////////////////////////////// 
 // Path A0 from VREF impedance
 Z_to_A0 = Z_Rpull + (Z_Rseries || Z_C2 || Z_ADC_A0)
 
 // Z_C2 >> Z_Rseries
 // Z_ADC_A0 >> Z_Rseries
 => Z_to_A0 ≈ Z_Rpull + Z_Rseries = 1000 + 100 = 1100 Ω
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
+///////////////////// Thevenin equivalent from SCT /////////////////////
+////////////////////////////////////////////////////////////////////////  
 // Total impedance seen from SCT
 // 1. To 3.3V through R1 : 10 kΩ
 // 2. To GND through R2+C_VREF : 33.3 kΩ
@@ -38,59 +53,66 @@ Z_parallel_VREF = 10k || 33.3k || 1.1k // = Z_th || Z_to_A0
 
 Z_total = Z_C1 + Z_parallel_VREF
         = 318 + 962 = 1280 Ω
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
+
+////////////////////////////////////////////////////////////////////////
+///////////// Capacitive divider - signal before filtering /////////////
+////////////////////////////////////////////////////////////////////////
 // Voltage at VREF (AC) :
 // Divider Z_C1 / Z_parallel
-V_VREF_AC / V_SCT = Z_parallel_VREF / (Z_C1 + Z_parallel_VREF)
-V_VREF_AC / V_SCT = 962 / 1280 = 0.752
+VREF_before_filter / V_SCT = Z_parallel_VREF / Z_total
+VREF_before_filter / V_SCT = 962 / 1280 = 0.752
 
-V_SCT = 417 mV // electric kettle 1250W with AC 100V => 12.5A on SCT-013-030 (12.5/30 = 0.417)
-V_VREF_AC = 417 × 0.752 = 314 mV RMS
+V_SCT = 417 mV // electric kettle 1250W with AC 100V => 12.5A on SCT-013-030 (12.5/30 = 0.417V)
+VREF_before_filter = 417 × 0.752 = 314 mV RMS
+// Part of the signal is "eaten" by the capacitor C1
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
+  
 
-// Voltage at A0 (via Rpull+Rseries)
-// Divider Rpull/(Rpull+Rseries) from VREF
-
-// Impedance between VREF and Junction B
-Z_at_B = Z_Rseries || Z_C2 || Z_ADC_A0 ≈ Z_Rseries = 100 Ω
-
-// Divider :
-V_B / V_VREF = Z_at_B / (Z_Rpull + Z_at_B)
-V_B / V_VREF = 100 / (1000 + 100) = 0.091
-
-V_B = 314 mV × 0.091 = 28.6 mV
-
-// Impedance from B to A0
-Z_ADC_A0 >> Z_Rseries => V_A0 ≈ V_B = 28.6 mV RMS
-
-// Voltage at A1 (VREF)
-Z_ADC_A1 >> Z_th => V_A1 ≈ V_VREF_AC = 314 mV RMS
-
-// Differential measure A1 - A0
-V_diff = V_A1 - V_A0
-V_diff = 314 mV - 28.6 mV = 285.4 mV RMS
-
-// Capaciter C_VREF in serial with R2 => high-pass filter
+////////////////////////////////////////////////////////////////////////
+//////// Capacitor C_VREF in serial with R2 => high-pass filter ////////
+////////////////////////////////////////////////////////////////////////  
 // 50 Hz < fc = 159Hz => low frequency blocked
 Z_C_VREF = 31.8 kΩ // 50 Hz
 Z_R2 = 10 kΩ
 
 // Signal attenuated by capacitive divider
-V_after_filter / V_before = Z_R2 / sqrt(Z_R2^2 + Z_C_VREF^2)
-V_after_filter / V_before = 10k / sqrt(10k^2 + 31.8k^2)
-V_after_filter / V_before ≈ 10k / 33.3k = 0.3
+VREF_after_filter / VREF_before_filter = Z_R2 / sqrt(Z_R2^2 + Z_C_VREF^2)
+VREF_after_filter / VREF_before_filter = 10k / sqrt(10k^2 + 31.8k^2)
+VREF_after_filter / VREF_before_filter ≈ 10k / 33.3k = 0.3
 
-=> Only 30% of the signal is received at 50 Hz
+// => Only 30% of the signal is received at 50 Hz
 
-// Signal at VREF with R2+C_VREF filter
-V_VREF_AC_crude = 314 mV // before
+// Apply high-pass filter to signal
+VREF = VREF_before_filter × 0.30
+VREF = 314 mV × 0.30
+VREF = 94 mV RMS = V_A1 // Z_ADC_A1 >> Z_th_VREF
+////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////
 
-// High-pass filter
-V_VREF_AC_real = 314 mV × 0.3 = 94 mV
 
-// Signal at A1
-V_A1 ≈ 94 mV
-// Signal at A0 through divider (Rseries / (Rpull + Rseries))
-V_A0 = 94 mV × 0.091 = 8.6 mV
-  
-// Differential measure A1 - A0
-V_diff = 94 - 8.6 = 85 mV // for 1250W electric kettle load
+////////////////////////////////////////////////////////////////////////
+///////////////////////// Resistive divider to A0 //////////////////////
+////////////////////////////////////////////////////////////////////////  
+// Voltage at A0 (via Rpull+Rseries)
+// Divider Rpull/(Rpull+Rseries) from VREF
+
+// Impedance between VREF and Junction B
+Z_B = Z_Rseries || Z_C2 || Z_ADC_A0 ≈ Z_Rseries = 100 Ω
+
+// Divider :
+V_B / VREF = Z_B / (Z_Rpull + Z_B)
+V_B / VREF = 100 / (1000 + 100) = 0.091
+=> V_B = 94 mV × 0.091 = 8.5 mV RMS = V_A0 // Z_ADC_A0 >> Z_Rseries
+
+
+///////////////////////// Differential measure A1 - A0 ////////////////////// 
+V_diff = V_A1 - V_A0
+V_diff = 94 mV - 8.5 mV = 285.4 mV RMS
+V_diff = 94 - 8.5 = 85.5 mV RMS // for 1250W electric kettle load
+
+// Sensibilité du système :
+// S = 85.5 mV / 1250 W = 68.4 µV/W
