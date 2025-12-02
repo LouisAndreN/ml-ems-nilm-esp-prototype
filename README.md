@@ -31,6 +31,7 @@ The goal is to provide an accessible and practical system for monitoring househo
 See `docs/schematic-circuit.png` for complete circuit.
 
 The SCT-013 current sensor connects via a 3.5mm TRRS jack.
+The current components allows to get until the 8th harmonics, which can be limited for monitoring more advanced devices such as induction heater, solderer, ...
 
 # Status
 - Dashboard for visualization in progress
