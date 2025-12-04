@@ -1,17 +1,15 @@
 # 🔌 Home Energy Management System prototype with NILM (Non-Intrusive Load Monitoring) Device 
 
-This project provides a full end-to-end Energy Management System, using  Non-Intrusive Load Monitoring (NILM) system designed for the Japanese electrical environment (100V, 50/60Hz).
-It integrates custom low-cost hardware, real household data, and lightweight machine learning models to estimate appliance-level energy usage in real time.
+This project provides a full end-to-end Energy Management System, using Non-Intrusive Load Monitoring (NILM) system designed for the Japanese electrical environment (100V, 50/60Hz).
+It integrates custom low-cost hardware and real household data to estimate energy usage in realtime.
 
-The goal is to provide an accessible and practical system for monitoring household energy usage, detecting anomalies, and predicting future consumption patterns — with a strong focus on real-world deployment rather than academic demonstration.
+The goal is to provide an accessible and practical prottype for monitoring household energy usage with a strong focus on real-world deployment.
 
 **Key functionnalities :**
-- Real-time appliance-level energy disaggregation (fridge, AC, IH cooking heater, computer, smartphone charging, lighting, etc.)
-- Forecasting of total household consumption and prediction of device usage patterns
-- From Custom analog conditioning circuit design to ML deployment
-- Dashboard for live monitoring and historical analysis
-- Edge preprocessing (ESP32) + Centralization od data for ML (Raspberry Pi 5 + Hailo-8L)
-- Support for Japanese standards (seasonal patterns, 30A breaker, 100V, 50/60Hz)
+- Forecasting realtime household consumption
+- From custom analog conditioning circuit design to dashboard for live monitoring and historical analysis
+- Edge preprocessing on ESP32
+- Support for Japanese standards (30A breaker, 100V, 50/60Hz)
 
 ## Used material
 
@@ -36,7 +34,7 @@ The current components allows to get until the 8th harmonics, which can be limit
 # Status : 🚧 **In progress**
 - Dashboard for visualization
 - Individual device signatures recording for classification library
-- Consideration of PCM1808 to get more harmonics for advanced devices and Deep Learning Model evaluation for prediction and anomaly detection
+- Consideration of PCM1808 to get more harmonics for advanced devices and Deep Learning Model evaluation for classification, prediction and anomaly detection
 
 # How to run
 
@@ -47,7 +45,7 @@ The current components allows to get until the 8th harmonics, which can be limit
 
 ## Future features
 
-Some devices can be tracked but because of the relative low precision of the ADS1115, the system needs to be improved with an audio card 48kHz (PCM1808 ?) to get more harmonics until 24kHz (Nyquist theorem) to detect specific devices such as induction heater.
+Some devices can be tracked but because of the relative low precision of the ADS1115, the system needs to be improved with an audio card 48kHz (PCM1808 ?) to get more harmonics until 24kHz (Nyquist theorem) to classify specific devices such as induction heater, air conditionner, ...
 
 # 日本語
 
