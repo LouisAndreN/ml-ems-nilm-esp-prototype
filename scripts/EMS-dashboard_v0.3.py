@@ -679,28 +679,28 @@ if st.session_state.calibration_state in ['ready', 'running']:
 else:
     st.info("👈 Complete calibration to start monitoring")
 
-# #===== AUTO REFRESH =====
-# if st.session_state.serial_connected:
-#     if st.session_state.calibration_state in ['noise', 'reference']:
-#         time.sleep(0.1) # Rafraîchissement rapide pendant calibration
-#         # st.rerun()
-#     elif st.session_state.calibration_state == 'running':
-#         time.sleep(0.5)
-#     st.rerun()
-
 #===== AUTO REFRESH =====
-# Remplacer les appels directs à st.rerun() par un autorefresh contrôlé
-# pip install streamlit-autorefresh
-from streamlit_autorefresh import st_autorefresh
-
 if st.session_state.serial_connected:
-    # refresh interval en ms
     if st.session_state.calibration_state in ['noise', 'reference']:
-        interval_ms = 100   # rafraîchissement rapide pendant calibration
+        time.sleep(0.1) # Rafraîchissement rapide pendant calibration
+        # st.rerun()
     elif st.session_state.calibration_state == 'running':
-        interval_ms = 500   # rafraîchissement normal
-    else:
-        interval_ms = 1000
+        time.sleep(0.5)
+    st.rerun()
 
-    # st_autorefresh renverra le nombre de refresh du widget (on l'ignore ici)
-    st_autorefresh(interval=interval_ms, key="nilm_autorefresh")
+# #===== AUTO REFRESH =====
+# # Remplacer les appels directs à st.rerun() par un autorefresh contrôlé
+# # pip install streamlit-autorefresh
+# from streamlit_autorefresh import st_autorefresh
+
+# if st.session_state.serial_connected:
+#     # refresh interval en ms
+#     if st.session_state.calibration_state in ['noise', 'reference']:
+#         interval_ms = 100   # rafraîchissement rapide pendant calibration
+#     elif st.session_state.calibration_state == 'running':
+#         interval_ms = 500   # rafraîchissement normal
+#     else:
+#         interval_ms = 1000
+
+#     # st_autorefresh renverra le nombre de refresh du widget (on l'ignore ici)
+#     st_autorefresh(interval=interval_ms, key="nilm_autorefresh")
