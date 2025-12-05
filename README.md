@@ -47,9 +47,5 @@ The current components allows to get until the 8th harmonics, which can be limit
 
 Some devices can be tracked but because of the relative low precision of the ADS1115, the system needs to be improved with an audio card 48kHz (PCM1808 ?) to get more harmonics until 24kHz (Nyquist theorem) to classify specific devices such as induction heater, air conditionner, ...
 
-# 日本語
-
-## 概要
-
 
 
